@@ -8,5 +8,5 @@ type ROUTE_NewsList = Array<{
   dislikes: number;
   source_name: NewsSourceName;
   source_link: string;
-  published_at: Date | null;
+  published_at: Date;
 }>;

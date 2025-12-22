@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
+
 import "./globals.css";
+
 import { QueryClientProviderHook } from "../hooks/queryProvider";
+import Header from "../components/header";
+import Footer from "../components/footer";
 
 export const metadata: Metadata = {
   title: "news.happy.tatar",
@@ -15,7 +19,11 @@ export default function RootLayout({
   return (
     <html lang="en" className="bg-dark">
       <QueryClientProviderHook>
-        <body className="max-w-275 m-auto">{children}</body>
+        <body className="min-w-screen min-h-screen">
+          <Header />
+          {children}
+          <Footer />
+        </body>
       </QueryClientProviderHook>
     </html>
   );
