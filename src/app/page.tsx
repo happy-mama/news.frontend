@@ -1,4 +1,3 @@
-import { GETlastNews, NEWS_KEYS } from "@/src/api/news";
 import {
   dehydrate,
   HydrationBoundary,
@@ -6,6 +5,8 @@ import {
 } from "@tanstack/react-query";
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
+
+import { GETlastNews, NEWS_KEYS } from "@/src/api/news";
 
 const RootPage = dynamic(() => import("@/src/pages/root/index"), { ssr: true });
 

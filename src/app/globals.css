@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 @theme {
-  --color-dark: #000;
-  --color-dark2: #0d0d0d;
+  --color-dark: #191a1c;
+  --color-dark2: #26282c;
   --color-dark3: #131313;
 
   --color-gray: #f1f1f1;
@@ -14,4 +14,6 @@
 
 :root {
   color: #e0e0e0;
+
+  font-family: var(--font-fira-sans);
 }

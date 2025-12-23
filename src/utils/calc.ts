@@ -14,3 +14,12 @@ export function dateToddmmyyyy(date: Date) {
     })
     .replace(/\./g, ".");
 }
+
+export function dateToddmm(date: Date) {
+  return date
+    ?.toLocaleDateString("ru-RU", {
+      day: "2-digit",
+      month: "2-digit",
+    })
+    .replace(/\./g, ".");
+}
