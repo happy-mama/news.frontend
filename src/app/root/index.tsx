@@ -4,13 +4,11 @@ import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 
 import { GETlastNews, NEWS_KEYS } from "@/src/api/news";
-import { dateToddmm, dateToddmmyyyy, dateTohhmm } from "@/src/utils/calc";
+import { dateToddmm } from "@/src/utils/calc";
 
 import CALENDAR_SVG from "@/src/assets/svg/calendar.svg";
 import Image from "next/image";
-import Markdown from "react-markdown";
 import axios from "axios";
-import rehypeStarryNight from "rehype-starry-night";
 
 export default function RootPage() {
   const { data: lastNews } = useQuery({
@@ -37,8 +35,7 @@ export default function RootPage() {
             const dateFormated = dateToddmm(date);
 
             return (
-              <Link
-                href={`/news/${news.slug}`}
+              <div
                 key={i}
                 className="flex flex-col justify-between gap-3 p-4 bg-dark2 rounded-xl group"
               >
@@ -47,18 +44,17 @@ export default function RootPage() {
                   width={600}
                   height={200}
                   alt="news-image"
-                  className="rounded-xl min-w-full object-cover max-h-[260px]"
+                  className="rounded-xl min-w-full object-cover max-h-65 select-none"
+                  draggable={false}
                 />
 
-                <h1 className="text-[26px] font-semibold leading-7 transition-all group-hover:underline group-hover:text-link-active">
-                  {news.name}
-                </h1>
+                <Link href={`/news/${news.slug}`}>
+                  <h1 className="text-[26px] font-semibold leading-7 transition-all group-hover:text-link hover:text-link-active hover:underline">
+                    {news.name}
+                  </h1>
+                </Link>
 
-                {/* <h2 className="text-[18px] leading-6">{news.description}</h2> */}
-
-                <Markdown rehypePlugins={[rehypeStarryNight]}>
-                  {markdown?.data}
-                </Markdown>
+                <h2 className="text-[18px] leading-6">{news.description}</h2>
 
                 <div className="w-full flex items-center justify-between">
                   <div className="flex items-center gap-2.5 text-[12px]">
@@ -74,7 +70,7 @@ export default function RootPage() {
                     {/* <span>0</span> */}
                   </div>
                 </div>
-              </Link>
+              </div>
             );
           })}
         </div>

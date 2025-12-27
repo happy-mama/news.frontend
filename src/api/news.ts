@@ -16,3 +16,15 @@ export async function GETlastNews() {
     return null;
   }
 }
+
+export async function GETNewsBySlug(slug: string) {
+  try {
+    const res = await axiosIsntance.get(`news/load/${slug}`, {});
+
+    return (res.data.data as ROUTE_NewsFull) || null;
+  } catch (e) {
+    console.error(e);
+
+    return null;
+  }
+}

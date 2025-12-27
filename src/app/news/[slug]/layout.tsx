@@ -6,21 +6,25 @@ import {
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
 
-import { GETlastNews, NEWS_KEYS } from "@/src/api/news";
+import { GETNewsBySlug, NEWS_KEYS } from "@/src/api/news";
 
-const RootPage = dynamic(() => import("@/src/app/root/index"), { ssr: true });
+const Page = dynamic(() => import("@/src/app/news/[slug]/page"), {
+  ssr: true,
+});
 
-export default async function Root() {
+export default async function Root(serverProps: ServerProps) {
+  const params = await serverProps.params;
+
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery({
-    queryKey: NEWS_KEYS.lastNews,
-    queryFn: () => GETlastNews(),
+    queryKey: NEWS_KEYS.newsBySlug,
+    queryFn: () => GETNewsBySlug(params.slug),
   });
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <RootPage />
+      <Page slug={params.slug} />
     </HydrationBoundary>
   );
 }
